@@ -3,3 +3,6 @@
 # dependencies
 /frontend/node_modules
 .env
+# Local Netlify folder
+.netlify
+/frontend/build

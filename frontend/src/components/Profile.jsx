@@ -7,6 +7,26 @@ const Profile = ({ uprofile }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [repos, setRepos] = useState([]);
+  const [dummy, setDummy] = useState([]);
+
+  const filterRepo = (e) => {
+    const value = e.target.value.toLowerCase();
+    try {
+      if (value) {
+        const data = repos.filter((repo) => {
+          const name = repo.name.toLowerCase();
+          const language = repo.language ? repo.language.toLowerCase() : '';
+          return name.includes(value) || language.includes(value);
+        });
+        setDummy(data);
+      } else {
+        fetchRepo(e);
+      }
+    } catch (e) {
+      console.log(e.message);
+      setError(e.message);
+    }
+  };
 
   const fetchRepo = async (e) => {
     e.preventDefault();
@@ -20,6 +40,7 @@ const Profile = ({ uprofile }) => {
       );
       if (data.status === 200) {
         setRepos(data.data);
+        setDummy(data.data);
         if (data.data.length === 0) {
           setError(`No Repo found for ${uprofile.login}`);
         }
@@ -32,6 +53,7 @@ const Profile = ({ uprofile }) => {
     }
     setLoading(false);
   };
+
   return (
     <div className='p-5'>
       <div className='card mb-3'>
@@ -50,23 +72,25 @@ const Profile = ({ uprofile }) => {
                   href={uprofile.html_url}
                   target='_blank'
                   rel='noreferrer'
-                  style={{ textDecoration: 'none', color: 'blue' }}
+                  style={{ textDecoration: 'none', color: 'red' }}
                 >
                   {uprofile.login}
                 </a>
+                <span className='text-color-blue'>
+                  {' :: ' + uprofile.name}
+                </span>
               </h5>
-              <h5 className='card-title'>{uprofile.name}</h5>
               <p className='card-text'>{uprofile.bio}</p>
+              <p className='card-text'>
+                <strong>Type: </strong> {uprofile.type}
+              </p>
+              <p className='card-text'>
+                <strong>Email: </strong> {uprofile.email}
+              </p>
 
               <ul>
                 <li className='badge bg-primary m-1'>
-                  <a
-                    href={uprofile.followers_url}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    Followers: {uprofile.followers || 0}
-                  </a>
+                  Followers: {uprofile.followers || 0}
                 </li>
                 <li className='badge bg-dark m-1'>
                   Following: {uprofile.following || 0}
@@ -79,15 +103,32 @@ const Profile = ({ uprofile }) => {
           </div>
         </div>
       </div>
-      {error && <h3>{error}</h3>}
+      {error && <h3 className='text-center mt-5'>{error}</h3>}
       {loading ? (
         <Spinner />
       ) : (
         <>
           {repos.length > 0 && (
-            <h4 className='text-center p-3'>Total Repo: {repos.length}</h4>
+            <>
+              <h4 className='text-center p-3'>Total Repo: {repos.length}</h4>
+              <div className='input-group mb-3'>
+                <span
+                  className='input-group-text'
+                  id='inputGroup-sizing-default'
+                >
+                  Search
+                </span>
+                <input
+                  type='text'
+                  className='form-control'
+                  aria-label='Sizing example input'
+                  aria-describedby='inputGroup-sizing-default'
+                  onChange={filterRepo}
+                />
+              </div>
+            </>
           )}
-          {repos.map((repo, id) => (
+          {dummy.map((repo, id) => (
             <Card key={id} repo={repo} />
           ))}
         </>

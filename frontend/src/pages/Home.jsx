@@ -2,12 +2,46 @@ import React, { useState } from 'react';
 import Profile from '../components/Profile';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
+// import { useEffect } from 'react';
 
 const Home = () => {
   const [userName, setUserName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+
+  // const getCode = async () => {
+  //   try {
+  //     const code =
+  //       window.location.href.match(/\?code=(.*)/) &&
+  //       window.location.href.match(/\?code=(.*)/)[1];
+  //     if (code) {
+  //       const body = {
+  //         code: code,
+  //         client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+  //         client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET,
+  //         redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+  //       };
+  //       const headers = {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //         'Access-Control-Allow-Origin': '*',
+  //       };
+  //       const data = await axios.post(
+  //         'https://github.com/login/oauth/access_token',
+  //         body,
+  //         headers
+  //       );
+  //       console.log(code, body);
+  //     }
+  //   } catch (e) {
+  //     console.log(e.message);
+  //     setError(e.message);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getCode();
+  // }, []);
 
   const fetchProfile = async (e) => {
     e.preventDefault();
@@ -36,7 +70,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='container p-5'>
+      <div className='container mt-5'>
         <div className=' row justify-content-md-center'>
           <div className='col col-xs-12 col-md-6' xs={12} md={6}>
             <h3>Get Repositries of the Github User</h3>
