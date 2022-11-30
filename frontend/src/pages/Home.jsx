@@ -17,7 +17,7 @@ const Home = () => {
     try {
       if (code && localStorage.getItem('accessToken') === null) {
         let data = await axios.get(
-          `http://localhost:8080/accesstoken?code=${code}`
+          `${process.env.REACT_APP_SERVER_URL}accesstoken?code=${code}`
         );
         data = data.data;
         data = data.split('=');
@@ -74,7 +74,7 @@ const Home = () => {
   //         'x-auth-token': token,
   //       },
   //     };
-  //     const res = await axios.get('http://localhost:8080/getuserdata', config);
+  //     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}getuserdata`, config);
   //     console.log(res);
   //   } catch (e) {
   //     console.log(e.message);
