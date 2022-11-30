@@ -1,47 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Profile from '../components/Profile';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
-// import { useEffect } from 'react';
 
 const Home = () => {
   const [userName, setUserName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const queryString = window.location.search;
+  const urlParam = new URLSearchParams(queryString);
+  const code = urlParam.get('code');
 
-  // const getCode = async () => {
-  //   try {
-  //     const code =
-  //       window.location.href.match(/\?code=(.*)/) &&
-  //       window.location.href.match(/\?code=(.*)/)[1];
-  //     if (code) {
-  //       const body = {
-  //         code: code,
-  //         client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-  //         client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET,
-  //         redirect_uri: process.env.REACT_APP_REDIRECT_URI,
-  //       };
-  //       const headers = {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //         'Access-Control-Allow-Origin': '*',
-  //       };
-  //       const data = await axios.post(
-  //         'https://github.com/login/oauth/access_token',
-  //         body,
-  //         headers
-  //       );
-  //       console.log(code, body);
-  //     }
-  //   } catch (e) {
-  //     console.log(e.message);
-  //     setError(e.message);
-  //   }
-  // };
+  const getCode = async () => {
+    setLoading(true);
+    try {
+      if (code && localStorage.getItem('accessToken') === null) {
+        let data = await axios.get(
+          `http://localhost:8080/accesstoken?code=${code}`
+        );
+        data = data.data;
+        data = data.split('=');
+        const token = data[1].split('&')[0];
+        if (data[0] === 'access_token') {
+          localStorage.setItem('accessToken', token);
+          window.location.href = '/';
+        }
+      }
+    } catch (e) {
+      console.log(e.message);
+      setError(e.message);
+    }
+    setLoading(false);
+  };
 
-  // useEffect(() => {
-  //   getCode();
-  // }, []);
+  useEffect(() => {
+    getCode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code]);
 
   const fetchProfile = async (e) => {
     e.preventDefault();
@@ -53,7 +49,6 @@ const Home = () => {
         `https://api.github.com/users/${userName}?sort=created:asc`,
         headers
       );
-      console.log(data);
       if (data.status === 200) {
         setUser(data.data);
       } else {
@@ -67,6 +62,31 @@ const Home = () => {
     }
     setLoading(false);
   };
+
+  /**
+   * @description Garbage data coming in response
+   */
+  // const fetchProfileUsingToken = async () => {
+  //   try {
+  //     const token = localStorage.getItem('accessToken');
+  //     const config = {
+  //       headers: {
+  //         'x-auth-token': token,
+  //       },
+  //     };
+  //     const res = await axios.get('http://localhost:8080/getuserdata', config);
+  //     console.log(res);
+  //   } catch (e) {
+  //     console.log(e.message);
+  //     setError('Something went wrong');
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (localStorage.getItem('accessToken')) {
+  //     fetchProfileUsingToken();
+  //   }
+  // }, []);
 
   return (
     <>
@@ -96,7 +116,7 @@ const Home = () => {
             </form>
           </div>
         </div>
-        {error && <h3>{error}</h3>}
+        {error && <h3 className='text-center mt-3'>{error}</h3>}
         {loading ? <Spinner /> : user && <Profile uprofile={user} />}
       </div>
     </>

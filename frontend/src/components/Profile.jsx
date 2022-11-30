@@ -124,6 +124,7 @@ const Profile = ({ uprofile }) => {
                   aria-label='Sizing example input'
                   aria-describedby='inputGroup-sizing-default'
                   onChange={filterRepo}
+                  placeholder='Search by name or language'
                 />
               </div>
             </>

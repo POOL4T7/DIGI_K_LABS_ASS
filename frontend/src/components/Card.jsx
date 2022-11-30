@@ -1,7 +1,7 @@
 const Card = ({ repo }) => {
   return (
     <>
-      <div className='row border rounded  m-1'>
+      <div  className='row border rounded  m-1'>
         <div className='col-sm-12 col-md-9 p-2'>
           <a
             href={repo.html_url}
