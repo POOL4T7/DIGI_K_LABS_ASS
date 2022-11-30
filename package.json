@@ -1,0 +1,33 @@
+{
+  "name": "digi_k_labs",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "server.js",
+  "scripts": {
+    "install-packages": "npm install && npm install --prefix frontend",
+    "server": "nodemon server",
+    "client": "npm start --prefix frontend ",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/POOL4T7/DIGI_K_LABS_ASS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/POOL4T7/DIGI_K_LABS_ASS/issues"
+  },
+  "homepage": "https://github.com/POOL4T7/DIGI_K_LABS_ASS#readme",
+  "dependencies": {
+    "axios": "^1.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
