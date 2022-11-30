@@ -9,7 +9,7 @@ const Profile = ({ uprofile }) => {
   const [repos, setRepos] = useState([]);
   const [dummy, setDummy] = useState([]);
 
-  const filterRepo = (e) => {
+  const filterRepo = async (e) => {
     const value = e.target.value.toLowerCase();
     try {
       if (value) {
@@ -35,7 +35,7 @@ const Profile = ({ uprofile }) => {
     try {
       const headers = { 'user-agent': 'node.js' };
       const data = await axios.get(
-        `https://api.github.com/users/${uprofile.login}/repos?sort=created:asc`,
+        `https://api.github.com/users/${uprofile.login}/repos`,
         headers
       );
       if (data.status === 200) {

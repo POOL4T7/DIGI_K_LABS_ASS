@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# DIGI-K-LABS-ASSIGNMENT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Develop a simple webapp to search & display GitHub User’s Profile using GitHub public APIs.
 
-## Available Scripts
+> <br>
 
-In the project directory, you can run:
+<!-- <img src="https://i.imgur.com/Cn25eVr.png" > -->
 
-### `npm start`
+<br >
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Clone the project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone https://github.com/POOL4T7/DIGI_K_LABS_ASS.git
+cd DIGI_K_LABS_ASS
+```
 
-### `npm test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Install dependencies for DIGI_K_LABS_ASS
 
-### `npm run build`
+```bash
+# Install dependencies
+npm i
+cd frontend
+npm i
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# for more info look at package.json and frontend/package.json on root folder
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Before starting the server make a .env file on root folder and add your constant value for OAuth2.O using Github
 
-### `npm run eject`
+- GITHUB_CLIENT_ID
+- GITHUB_CLIENT_SECRET
+- REDIRECT_URI
+- PORT
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<br>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Before starting the app make a .env file on root folder and add your constant value for OAuth2.O using Github
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- REACT_APP_GITHUB_CLIENT_ID
+- REACT_APP_GITHUB_CLIENT_SECRET
+- REACT_APP_REDIRECT_URI
+- REACT_APP_SERVER_URL
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Run the server, app simultaneously
 
-## Learn More
+```bash
+# make sure you are on root directory of project
+npm start
+# open another terminal
+cd frontend
+npm start
+# Server runs on http://localhost:8080 and app on http://localhost:3000
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Deployment
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This app is deployed on **Netlify**
