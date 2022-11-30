@@ -2,9 +2,9 @@
 
 > Develop a simple webapp to search & display GitHub User’s Profile using GitHub public APIs.
 
-> <br>
+<br >
 
-<!-- <img src="https://i.imgur.com/Cn25eVr.png" > -->
+<img src="https://i.ibb.co/XkXXTfn/Screenshot-from-2022-11-30-11-03-47.png" alt="Screenshot-from-2022-11-30-11-03-47https://ibb.co/6JYY5cK" >
 
 <br >
 
